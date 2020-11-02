@@ -1,7 +1,7 @@
 # instabulkextractor
 search instagram accounts matching keywords and extract their media'
 
-![](images/instabulkextractor.png)
+<img src="images/instabulkextractor.png" height="400px")
 
 ## How to install
 Simply run:
