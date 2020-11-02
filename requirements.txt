@@ -1,0 +1,4 @@
+requests>=2.21.0
+python-slugify==3.0.2
+pyfiglet==0.8.post1     
+argparse==1.2.1
