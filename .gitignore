@@ -131,4 +131,5 @@ dmypy.json
 # input en output folder
 /input
 /output
+/images
 
