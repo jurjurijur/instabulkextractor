@@ -53,6 +53,6 @@ Example:
 ## Input file 
 The input needs to be given using -i file leading to a input.txt file. every keyword/account name needs to be on a seperate line.
 
-:
+Example:
 <img src="images/example-imputlist.png">
 
