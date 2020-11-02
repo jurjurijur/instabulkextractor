@@ -13,8 +13,9 @@ This project runs on the project https://github.com/realsirjoe/instagram-scraper
 No further coding or configuration is required for the use of instabulkextractor
 
 <img src="images/instabulkextractor.png" height="550px">
+
 ## Extracted Account Info
-<img src="images/result.png" width='400px'>
+<img src="images/result.png" width='600px'>
 
 ## How to install
 Simply run:
