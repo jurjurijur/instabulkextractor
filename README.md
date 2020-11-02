@@ -10,7 +10,7 @@ As of yet instabulkextractor does not support fetching a single account.
 The application requires an instagram account to run. the username and password for this account are to be specified in a login.txt file. 
 
 This project runs on the project https://github.com/realsirjoe/instagram-scraper. 
-No further coding or configuration is required for the use of instabulkextractor
+No further coding configuration, or downloading is required for the use of instabulkextractor
 
 <img src="images/instabulkextractor.png" height="550px">
 
