@@ -13,6 +13,8 @@ This project runs on the project https://github.com/realsirjoe/instagram-scraper
 No further coding or configuration is required for the use of instabulkextractor
 
 <img src="images/instabulkextractor.png" height="550px">
+## Extracted Account Info
+<img src="images/result.png" width='400px'>
 
 ## How to install
 Simply run:
@@ -43,12 +45,13 @@ Feel free to make your own tests and let us know of any limits you experienced
 ## Login
 For the tool to be able to use the instagram account the -l flag needs to lead to a login.txt file.
 Its very important that the first line is the username and the second line the password 
+
 Example: 
 <img src="images/example-logintxt.png">
 
 ## Input file 
-
 The input needs to be given using -i file leading to a input.txt file. every keyword/account name needs to be on a seperate line.
-Example:
+
+:
 <img src="images/example-imputlist.png">
 
