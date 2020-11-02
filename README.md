@@ -1,7 +1,7 @@
 # instabulkextractor
-Insta Bulk Extractor will take a list of usernames/keywords. The programm will extract all user information of the users found by instagram with the given keyword/usernames, and export them into a csv file outputted to a specified directory. 
+Insta Bulk Extractor will take a list of usernames/keywords. The program will extract all user information of the users found by instagram with the given keyword/usernames, and export them into a csv file outputted to a specified directory. 
 
-When the -m option is specified it will also exoprt the given amount of latest media to a directory matching the account name within the specified output directory
+When the -m option is specified it will also export the given amount of latest media to a directory matching the account name within the specified output directory
 this media includes both pictures and video's. The programm is only able to extract media from public accounts
 
 Insta bulk extractor will find results identical to the results generated when typing a search term in the instagram app. 
