@@ -3,6 +3,7 @@ import csv
 import re
 import argparse
 import requests
+import time
 from pyfiglet import Figlet
 from igramscraper.instagram import Instagram
 
@@ -41,8 +42,19 @@ def readKeywordList(path):
                 keywordList = f.read().splitlines() 
         f.close()
         return keywordList
-         
-def searchAccountsWithKeyWord(instagram, keywordList):
+
+def exactAccountSearch(instagram, keywordList):
+        #Get details from account found
+        accountList =[]
+        for keyword in keywordList:
+                try: 
+                        account = instagram.get_account(keyword)
+                        accountList.append(account)
+                except:
+                        accountList.append("not Found")
+        return accountList
+
+def broadAccountSearch(instagram, keywordList):
        #Search for accounts matching keyword
         keywordresults = dict()
         for keyword in keywordList:
@@ -58,6 +70,7 @@ def searchAccountsWithKeyWord(instagram, keywordList):
                 
 def downloadMedia(instagram, amountOfMedia, accountList, outputDir):
     for account in accountList:
+            mediaList = False  
             try:
               mediaList = instagram.get_medias(account.username, amountOfMedia)
             except:
@@ -84,13 +97,19 @@ def downloadPictureFromURL(url, destinationPath):
         file.close()
 
 def printDetailsCSV(accountList, outputDir):
-        abs_src = outputDir + "/results.csv"
+        import time
+        timestr = time.strftime("%Y%m%d-%H%M%S")
+
+        abs_src = outputDir + "/results_"+ timestr+ ".csv"
         with open(abs_src, 'w', newline='') as myfile:
                         wr = csv.writer(myfile, quoting=csv.QUOTE_ALL)
                         wr.writerow(["identifier","username","full_name","biography","profile_picture_url","external_url","media_count","followed_by_count","follows_count","is_private","is_verified", "phonenumber_in_bio"])
                         for x in range(len(accountList)):     
                                 account = accountList[x]
-                                record = [account.identifier,account.username, account.full_name, account.biography, account.get_profile_picture_url(), account.external_url, account.media_count, account.followed_by_count, account.follows_count,  account.is_private, account.is_verified, findDutchPhoneNumber(account.biography)]
+                                if not isinstance(account, str):
+                                        record = [account.identifier,account.username, account.full_name, account.biography, account.get_profile_picture_url(), account.external_url, account.media_count, account.followed_by_count, account.follows_count,  account.is_private, account.is_verified, findDutchPhoneNumber(account.biography)]
+                                else:
+                                        record = account
                                 wr.writerow(record)
         myfile.close()
 
@@ -105,21 +124,22 @@ def findDutchPhoneNumber(string):
         return result
 #################################################### ARG PARSING #########################################################################
 parser = argparse.ArgumentParser(description='Scrape instagram for user information and media')
-#accountSearch = parser.add_mutually_exclusive_group()
-#accountSearch.add_argument('-a', '--accountname', help='give account name to search')
 parser.add_argument('-l', '--login', required=True, metavar='PATH',help='specify the absolute file path containing login.txt (first line username, second line password')
-parser.add_argument('-i', '--input', required=True, metavar='PATH',help='specify the absolute file path containing accountnames to search for (returns accounts matching given keywords)')
+parser.add_argument('-i', '--input', required=True, metavar='PATH',help='specify the absolute file path containing accountnames/keywoards')
+typesearch = parser.add_mutually_exclusive_group()
+typesearch.add_argument('-e', '--exact', action="store_true", help='retreive info from account matching exact keyword (keword kevin finds the one account kevin)')
+typesearch.add_argument('-b', '--broad', action="store_true", help='retreive data all accounts found by keyword (keyword kevin finds all kevins)')
 parser.add_argument('-o', '--output', required=True, metavar='PATH',  help='specify the absolute path to output directory for the extracted information and media')
 parser.add_argument('-m', "--media", type=int, metavar='AMOUNT', help='extract given amount of media from found accounts')
 parser.add_argument('-p', "--proxy", metavar='ADDR', help='specify http proxy adress: http://ip-address')
 parser.add_argument('-ps', "--proxysecure", metavar='ADDR', help='specify https proxy adress: https://ip-address can either use -p or -ps or both')
 
-#parser.add_argument('-l' '--login', help='specify file path containing login details for instagram account used to search from')
-
 def Main ():
         printBanner()
         args = parser.parse_args()
-        #args = parser.parse_args(['-h'])
+        if not (args.exact or args.broad):
+                parser.error('Add search method --exact or --broad')
+
         instagram = Instagram()
         if loginInstagram:
                 if args.proxy:
@@ -129,8 +149,13 @@ def Main ():
                 outputDir = args.output
                 print("Read inputfile")
                 keywordList = readKeywordList(inputFile)
+
                 print("Fetch Accounts")
-                accountlist = searchAccountsWithKeyWord(instagram, keywordList)
+                if args.broad:
+                        accountlist = broadAccountSearch(instagram, keywordList)
+                if args.exact:
+                        accountlist = exactAccountSearch(instagram, keywordList)
+
                 print("print account details to CSV")
                 printDetailsCSV(accountlist, outputDir)
                 if args.media: 

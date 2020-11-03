@@ -1,15 +1,16 @@
 # instabulkextractor
-Insta Bulk Extractor will take a list of usernames/keywords. The program will extract all user information of the users found by instagram with the given keyword/usernames, and export them into a csv file outputted to a specified directory. 
+Insta Bulk Extractor will take a list of usernames/keywords. The program --broad function will extract all user information of the users found by instagram with the given keyword/usernames, and export them into a csv file outputted to a specified directory. 
+
+The --exact function will return a single account matching the given keyword when found. When the given account is not found this programm will return report "not found" in the csv file
 
 When the -m option is specified it will also export the given amount of latest media to a directory matching the account name within the specified output directory
 this media includes both pictures and video's. The programm is only able to extract media from public accounts
 
 Insta bulk extractor will find results identical to the results generated when typing a search term in the instagram app. 
-As of yet instabulkextractor does not support fetching a single account. 
 
 The application requires an instagram account to run. the username and password for this account are to be specified in a login.txt file. 
 
-This project runs on the project https://github.com/realsirjoe/instagram-scraper. 
+This project is based on the project https://github.com/realsirjoe/instagram-scraper. 
 No further coding configuration, or downloading is required for the use of instabulkextractor
 
 <img src="images/instabulkextractor.png" height="550px">
@@ -29,7 +30,7 @@ pip install -r requirements.txt
 ## How to run
 ```
 cd ~/instabulkextractor
-python3 instabulkextractor.py -l ~/input/login.txt -i ~/input/username.txt -o ~/output/ -m 20 -p http://ip-adress-proxy:portnb
+python3 instabulkextractor.py -l ~/input/login.txt -i ~/input/username.txt -b -o ~/output/ -m 20 -p http://ip-adress-proxy:portnb
 ```
 ## Recommended limits 
 Instagram has protection against scraping. 
