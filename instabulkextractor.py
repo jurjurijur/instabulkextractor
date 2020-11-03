@@ -125,10 +125,10 @@ def findDutchPhoneNumber(string):
 #################################################### ARG PARSING #########################################################################
 parser = argparse.ArgumentParser(description='Scrape instagram for user information and media')
 parser.add_argument('-l', '--login', required=True, metavar='PATH',help='specify the absolute file path containing login.txt (first line username, second line password')
-parser.add_argument('-i', '--input', required=True, metavar='PATH',help='specify the absolute file path containing accountnames/keywoards')
+parser.add_argument('-i', '--input', required=True, metavar='PATH',help='specify the absolute file path containing accountnames/keywords')
 typesearch = parser.add_mutually_exclusive_group()
-typesearch.add_argument('-e', '--exact', action="store_true", help='retreive info from account matching exact keyword (keword kevin finds the one account kevin)')
-typesearch.add_argument('-b', '--broad', action="store_true", help='retreive data all accounts found by keyword (keyword kevin finds all kevins)')
+typesearch.add_argument('-e', '--exact', action="store_true", help='retrieve info from account matching exact keyword (keword kevin finds the one account kevin)')
+typesearch.add_argument('-b', '--broad', action="store_true", help='retrieve info from all accounts found by keyword (keyword kevin finds all kevins)')
 parser.add_argument('-o', '--output', required=True, metavar='PATH',  help='specify the absolute path to output directory for the extracted information and media')
 parser.add_argument('-m', "--media", type=int, metavar='AMOUNT', help='extract given amount of media from found accounts')
 parser.add_argument('-p', "--proxy", metavar='ADDR', help='specify http proxy adress: http://ip-address')
