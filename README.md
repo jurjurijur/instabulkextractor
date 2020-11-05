@@ -30,7 +30,7 @@ pip install -r requirements.txt
 ## How to run
 ```
 cd ~/instabulkextractor
-python3 instabulkextractor.py -l ~/input/login.txt -i ~/input/username.txt -b -o ~/output/ -m 20 -p http://ip-adress-proxy:portnb
+python3 instabulkextractor.py -l ~/input/login.txt -i ~/input/keywords.txt -b -o ~/output/ -m 20 -p http://ip-adress-proxy:portnb
 ```
 ## Recommended limits 
 Instagram has protection against scraping. 
