@@ -8,7 +8,7 @@ this media includes both pictures and video's. The programm is only able to extr
 
 Insta bulk extractor will find results identical to the results generated when typing a search term in the instagram app. 
 
-The application requires an instagram account to run. the username and password for this account are to be specified in a login.txt file. 
+The application does not requires an instagram account to run.
 
 This project is based on the project https://github.com/realsirjoe/instagram-scraper. 
 No further coding configuration, or downloading is required for the use of instabulkextractor
@@ -30,7 +30,7 @@ python3 -m pip install -r requirements.txt
 ## How to run
 ```
 cd ~/instabulkextractor
-python3 instabulkextractor.py -l ~/input/login.txt -i ~/input/keywords.txt -b -o ~/output/ -m 20 -p http://ip-adress-proxy:portnb
+python3 instabulkextractor.py -i ~/input/keywords.txt -b -o ~/output/ -m 20 -p http://ip-adress-proxy:portnb
 ```
 ## Recommended limits 
 Instagram has protection against scraping. 
