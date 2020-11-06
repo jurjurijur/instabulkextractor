@@ -44,13 +44,6 @@ If different proxies and accounts are used for all requests and the circle doesn
 
 Feel free to make your own tests and let us know of any limits you experienced
 
-## Login
-For the tool to be able to use the instagram account the -l flag needs to lead to a login.txt file.
-Its very important that the first line is the username and the second line the password 
-
-Example: 
-<img src="images/example-logintxt.png">
-
 ## Input file 
 The input needs to be given using -i file leading to a input.txt file. every keyword/account name needs to be on a seperate line.
 

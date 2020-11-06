@@ -1,4 +1,5 @@
 import os
+import sys
 import csv
 import re
 import argparse
@@ -18,21 +19,24 @@ def setProxies(instagram, http, https=False):
         if https:
                 proxies[https] = https
         instagram.set_proxies(proxies)        
-def loginInstagram(instagram, path):
-        abs_src = os.path.abspath(path)
-        loginDetails=[]
-        #Read File
-        with open(abs_src) as f:   
-                loginDetails = f.read().splitlines() 
-        f.close()
-        user = loginDetails[0]
-        passw = loginDetails[1]
-        try:
-                instagram.with_credentials(user, passw)
-                instagram.login()
-                return True
-        except: 
-                return False
+#def loginInstagram(instagram, path):
+#        abs_src = os.path.abspath(path)
+#        loginDetails=[]
+#        #Read File
+#        with open(abs_src) as f:   
+#                loginDetails = f.read().splitlines() 
+#        f.close()
+#        user = loginDetails[0]
+#        passw = loginDetails[1]
+#        try:
+#                instagram.with_credentials(user, passw)
+#                instagram.login()
+#                print("logged in")
+#                return True
+#        except: 
+#                e = sys.exc_info()[0]
+#                print(e)
+#                return False
 
 def readKeywordList(path):
         abs_src = os.path.abspath(path)
@@ -124,7 +128,7 @@ def findDutchPhoneNumber(string):
         return result
 #################################################### ARG PARSING #########################################################################
 parser = argparse.ArgumentParser(description='Scrape instagram for user information and media')
-parser.add_argument('-l', '--login', required=True, metavar='PATH',help='specify the absolute file path containing login.txt (first line username, second line password')
+#parser.add_argument('-l', '--login', required=True, metavar='PATH',help='specify the absolute file path containing login.txt (first line username, second line password')
 parser.add_argument('-i', '--input', required=True, metavar='PATH',help='specify the absolute file path containing accountnames/keywords')
 typesearch = parser.add_mutually_exclusive_group()
 typesearch.add_argument('-e', '--exact', action="store_true", help='retrieve info from account matching exact keyword (keword kevin finds the one account kevin)')
@@ -141,28 +145,29 @@ def Main ():
                 parser.error('Add search method --exact or --broad')
 
         instagram = Instagram()
-        if loginInstagram:
-                if args.proxy:
-                        setProxies(instagram, args.proxy)
+#        loginInstagram(instagram, args.login)
+#        if loginInstagram:
+        if args.proxy:
+                setProxies(instagram, args.proxy)
 
-                inputFile = args.input
-                outputDir = args.output
-                print("Read inputfile")
-                keywordList = readKeywordList(inputFile)
+        inputFile = args.input
+        outputDir = args.output
+        print("Read inputfile")
+        keywordList = readKeywordList(inputFile)
 
-                print("Fetch Accounts")
-                if args.broad:
-                        accountlist = broadAccountSearch(instagram, keywordList)
-                if args.exact:
-                        accountlist = exactAccountSearch(instagram, keywordList)
+        print("Fetch Accounts")
+        if args.broad:
+                accountlist = broadAccountSearch(instagram, keywordList)
+        if args.exact:
+                accountlist = exactAccountSearch(instagram, keywordList)
 
-                print("print account details to CSV")
-                printDetailsCSV(accountlist, outputDir)
-                if args.media: 
-                        print("Fetch Media")
-                        downloadMedia(instagram, args.media, accountlist, outputDir)       
-        else: 
-                print("problems with login")
+        print("print account details to CSV")
+        printDetailsCSV(accountlist, outputDir)
+        if args.media: 
+                print("Fetch Media")
+                downloadMedia(instagram, args.media, accountlist, outputDir)       
+        #else: 
+        #        print("problems with login")
         print("Finished")
 
 if __name__ == '__main__':
