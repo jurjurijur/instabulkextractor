@@ -24,7 +24,7 @@ Simply run:
 git clone https://github.com/jurjurijur/instabulkextractor.git
 cd ~/instabulkextractor
 chmod +x instabulkextractor.py
-pip install -r requirements.txt
+python3 -m pip install -r requirements.txt
 ```
 
 ## How to run
