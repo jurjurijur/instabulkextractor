@@ -40,7 +40,7 @@ to fight agianst this you can specify a http and/or a https proxy server using t
 
 It is recommended to make a short break between each request of 30s (+- random)
 In between all 10 requests a long break (300-600s)
-If different proxies and accounts are used for all requests and the circle doesn't repeat too fast these limits don't apply ;)
+If different proxies are used for all requests and the circle doesn't repeat too fast these limits don't apply ;)
 
 Feel free to make your own tests and let us know of any limits you experienced
 
